@@ -6,9 +6,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     public float Speed = 1f;
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    [SerializeField]
+    private AudioClip _hitSound;
+
+    // Update is called once per frame
+    void FixedUpdate () {
         transform.position += transform.right * Speed;
 	}
 
@@ -16,10 +19,20 @@ public class Bullet : MonoBehaviour {
     {
         if (collision.tag == "Wall")
             DestroyBullet();
+
+        DestroyBullet();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+            DestroyBullet();
     }
 
     private void DestroyBullet()
     {
+        if (_hitSound != null)
+            AudioSource.PlayClipAtPoint(_hitSound, transform.position);
         // TODO: Play particle system
         Destroy(gameObject);
     }

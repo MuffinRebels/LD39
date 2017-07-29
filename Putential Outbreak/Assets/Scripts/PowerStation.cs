@@ -11,6 +11,9 @@ public class PowerStation : MonoBehaviour
     private bool _isInRange = false;
     private bool _poweredOn = false;
 
+    [SerializeField]
+    private Door[] _doors;
+
     private void Start()
     {
         _collider = GetComponent<BoxCollider2D>();
@@ -51,6 +54,10 @@ public class PowerStation : MonoBehaviour
             gameManager.AddPower(PowerCellPowerValue);
             // TODO: UI!
             Debug.Log("Powered on this station");
+            for(int i = 0; i < _doors.Length; i++)
+            {
+                _doors[i].Open();
+            }
         } else
         {
             // TODO: UI!
