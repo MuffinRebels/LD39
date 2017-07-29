@@ -93,7 +93,7 @@ public class Player : MonoBehaviour {
             _weaponIndex = 0;
         else
             _weaponIndex++;
-
+        
         SwitchWeapon(_weapons[_weaponIndex]);
     }
 
