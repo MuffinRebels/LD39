@@ -20,7 +20,9 @@ public class Player : MonoBehaviour {
     private float _rotationHardness = 0.3f;
 
     [SerializeField]
-    private GameObject _weapon;
+    private GameObject[] _weapons;
+
+    private int _weaponIndex = 0;
 
     private int _health;
     private int _oxygen;
@@ -28,12 +30,13 @@ public class Player : MonoBehaviour {
     private Rigidbody2D _rigid;
 
     private Weapon _weaponScript;
+    private GameObject _weapon;
 
-	void Start () {
+    void Start () {
         _health = _maxHealth;
         _oxygen = _maxOxygen;
         _rigid = GetComponent<Rigidbody2D>();
-        _weaponScript = _weapon.GetComponent<Weapon>();
+        SwitchWeapon(_weapons[0]);
     }
 
     void Update()
@@ -49,6 +52,11 @@ public class Player : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.R))
         {
             Reload();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            NextWeapon();
         }
     }
 
@@ -66,6 +74,27 @@ public class Player : MonoBehaviour {
         {
             _weaponScript.Reload();
         }
+    }
+
+    public void SwitchWeapon(GameObject weapon)
+    {
+        if(_weapon != null)
+            _weapon.SetActive(false);
+
+        _weapon = weapon;
+        _weapon.SetActive(true);
+        _weaponScript = weapon.GetComponent<Weapon>();
+    }
+
+    private void NextWeapon()
+    {
+        int length = _weapons.Length;
+        if (_weaponIndex + 1 == length)
+            _weaponIndex = 0;
+        else
+            _weaponIndex++;
+
+        SwitchWeapon(_weapons[_weaponIndex]);
     }
 
     void FixedUpdate () {

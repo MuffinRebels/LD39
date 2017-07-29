@@ -26,7 +26,7 @@ public class Weapon : MonoBehaviour {
 
     [SerializeField]
     private int _clipSize = 10;
-
+    
     private int _ammo = 30, _ammoInClip;
     private float _reloadTimer = 0, _shotTimer = 0;
     private bool _isReloading = false;
@@ -48,16 +48,15 @@ public class Weapon : MonoBehaviour {
                 float angle = Random.Range(-_shotSpread, _shotSpread);
                 Quaternion rotation = shooter.rotation;
                 rotation.z += angle;
-                //rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
                 
                 Instantiate(Bullet, BulletExit.position, rotation, null);
                 _ammoInClip--;
             }
-            //AudioSource.PlayClipAtPoint(ShootAudio, transform.position);
+            PlaySound(ShootAudio);
             _shotTimer = 0;
         }else if(_ammoInClip == 0 && _shotTimer >= _shootSpeed && !_isReloading)
         {
-            //AudioSource.PlayClipAtPoint(EmptyAudio, transform.position);
+            PlaySound(EmptyAudio);
             _shotTimer = 0;
         }
     }
@@ -65,7 +64,15 @@ public class Weapon : MonoBehaviour {
     public void Reload()
     {
         _isReloading = true;
-        //AudioSource.PlayClipAtPoint(ReloadAudio, transform.position);
+        PlaySound(ReloadAudio);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if(clip != null)
+        {
+            AudioSource.PlayClipAtPoint(clip, transform.position);
+        }
     }
 
     void Update()
