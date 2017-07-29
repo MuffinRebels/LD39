@@ -48,8 +48,11 @@ public class Weapon : MonoBehaviour {
                 float angle = Random.Range(-_shotSpread, _shotSpread);
                 Quaternion rotation = shooter.rotation;
                 rotation.z += angle;
+
+                Vector3 position = BulletExit.position;
+                position.z = 0;
                 
-                Instantiate(Bullet, BulletExit.position, rotation, null);
+                Instantiate(Bullet, position, rotation, null);
                 _ammoInClip--;
             }
             PlaySound(ShootAudio);
