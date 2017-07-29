@@ -10,10 +10,13 @@ public class MessageWriter : MonoBehaviour {
     [SerializeField]
     private string _message;
 
+    [SerializeField]
+    private AudioClip _typeSound;
+
     private float _typeTimer = 0;
     private int _charIndex = 0;
 
-    public string Message;
+    private string _finalMessage;
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,9 +31,17 @@ public class MessageWriter : MonoBehaviour {
 
     private void Write()
     {
-        Message += _message[_charIndex];
+        _finalMessage += _message[_charIndex];
         _charIndex++;
 
+        Debug.Log(_finalMessage);
         // TODO: Play sound
+        if (_typeSound != null)
+            AudioSource.PlayClipAtPoint(_typeSound, Camera.main.transform.position);
+    }
+
+    public string GetMessage()
+    {
+        return _finalMessage;
     }
 }
