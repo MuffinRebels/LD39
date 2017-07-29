@@ -29,8 +29,12 @@ public class GameManager : MonoBehaviour {
         {
             Power -= _powerDecreaseVal;
             _timer = 0;
-            Debug.Log("Power: " + Power);
         }
+    }
+
+    public void AddPower(float newVal)
+    {
+        Power += newVal;
     }
 
 }
