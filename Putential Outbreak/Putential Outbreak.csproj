@@ -90,8 +90,11 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\ItemHealthPack.cs" />
-    <Compile Include="Assets\Scripts\Light Flicker.cs" />
+    <Compile Include="Assets\Scripts\ItemPowerCell.cs" />
+    <Compile Include="Assets\Scripts\LightFlicker.cs" />
+    <Compile Include="Assets\Scripts\MessageWriter.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\PowerStation.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
