@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
     private GameObject _weapon;
 
     void Start () {
-        _health = _maxHealth;
+        _health = _maxHealth - 10;
         _oxygen = _maxOxygen;
         _rigid = GetComponent<Rigidbody2D>();
         SwitchWeapon(_weapons[0]);
