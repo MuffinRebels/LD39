@@ -11,4 +11,16 @@ public class Bullet : MonoBehaviour {
 	void FixedUpdate () {
         transform.position += transform.right * Speed;
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Wall")
+            DestroyBullet();
+    }
+
+    private void DestroyBullet()
+    {
+        // TODO: Play particle system
+        Destroy(gameObject);
+    }
 }
