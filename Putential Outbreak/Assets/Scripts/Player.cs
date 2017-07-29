@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
 
     public const string PLAYER_NAME = "Putin";
@@ -18,14 +19,19 @@ public class Player : MonoBehaviour {
     private int _health;
     private int _oxygen;
 
+    private Rigidbody2D _rigid;
+
 	void Start () {
         _health = _maxHealth;
         _oxygen = _maxOxygen;
+        _rigid = GetComponent<Rigidbody2D>();
     }
 	
 	void FixedUpdate () {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal") * _speed.x;
+        float vertical = Input.GetAxis("Vertical") * _speed.y;
+
+        _rigid.AddForce(new Vector2(horizontal, vertical));
 	}
 
     public int GetHealth()
