@@ -19,18 +19,56 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private float _rotationHardness = 0.3f;
 
+    [SerializeField]
+    private GameObject _weapon;
+
     private int _health;
     private int _oxygen;
 
     private Rigidbody2D _rigid;
 
+    private Weapon _weaponScript;
+
 	void Start () {
         _health = _maxHealth;
         _oxygen = _maxOxygen;
         _rigid = GetComponent<Rigidbody2D>();
+        _weaponScript = _weapon.GetComponent<Weapon>();
     }
-	
-	void FixedUpdate () {
+
+    void Update()
+    {
+        if(_weaponScript.IsAuto && Input.GetMouseButton(0))
+        {
+            Shoot();
+        }else if(!_weaponScript.IsAuto && Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
+    }
+
+    void Shoot()
+    {
+        if(_weaponScript != null)
+        {
+            _weaponScript.Shoot(transform);
+        }
+    }
+
+    void Reload()
+    {
+        if (_weaponScript != null)
+        {
+            _weaponScript.Reload();
+        }
+    }
+
+    void FixedUpdate () {
 
         // Moving
         float horizontal = Input.GetAxis("Horizontal") * _speed.x;
