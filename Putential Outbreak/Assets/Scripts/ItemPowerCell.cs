@@ -10,7 +10,9 @@ public class ItemPowerCell : Item {
     {
         base.Pickup();
 
-        GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        gameManager.AddPower(PowerValue);
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player.HasPowerCell = true;
+
+        Destroy(gameObject);
     }
 }

@@ -36,7 +36,7 @@ public class Item : MonoBehaviour {
     private void Update()
     {
         // TODO: Show UI saying "Press E to pickup {ItemName}
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && _isInRange)
             Pickup();
     }
 

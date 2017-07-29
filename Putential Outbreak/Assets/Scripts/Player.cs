@@ -7,6 +7,8 @@ public class Player : MonoBehaviour {
 
     public const string PLAYER_NAME = "Putin";
 
+    public bool HasPowerCell = false;
+
     [SerializeField]
     private Vector2 _speed;
 
