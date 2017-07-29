@@ -8,6 +8,8 @@ public class ItemHealthPack : Item {
 
 	protected override void Pickup()
     {
+        base.Pickup();
+
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         player.ModifyHealth(Health);
     }
