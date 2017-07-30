@@ -10,6 +10,7 @@ public class PowerStation : MonoBehaviour
     private BoxCollider2D _collider;
     private bool _isInRange = false;
     private bool _poweredOn = false;
+    private AudioSource _audioSource;
 
     [SerializeField]
     private Door[] _doors;
@@ -18,6 +19,7 @@ public class PowerStation : MonoBehaviour
     {
         _collider = GetComponent<BoxCollider2D>();
         _collider.isTrigger = true;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,6 +56,7 @@ public class PowerStation : MonoBehaviour
             gameManager.AddPower(PowerCellPowerValue);
             // TODO: UI!
             Debug.Log("Powered on this station");
+            _audioSource.Play();
             for(int i = 0; i < _doors.Length; i++)
             {
                 _doors[i].Open();
